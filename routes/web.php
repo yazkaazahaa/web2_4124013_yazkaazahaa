@@ -1,37 +1,61 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\KatalogController;
 
-/* ROUTE STATIS */
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/tentang', function () {
-    return "<h1>Tentang Usaha Ramen Yazkaa</h1>";
-})->name('tentang.index');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/kontak', function () {
-    return "<h1>Kontak: 08xxxxxxxx</h1>";
-})->name('kontak.index');
-
-Route::get('/promo', function () {
-    return "<h1>Promo Diskon Ramen 20%</h1>";
-})->name('promo.index');
-
-
-/* ROUTE PROFIL */
-
-Route::get('/profil', [ProfilController::class, 'index'])
-    ->name('profil.index');
-
-Route::get('/profil/{nim}', [ProfilController::class, 'show'])
-    ->name('profil.show');
+/* ================= PROFIL ================= */
+Route::get('/profil', function () {
+    return view('profil', [
+        'nama' => 'Yazka',
+        'nim' => '4124013',
+        'prodi' => 'Sistem Informasi',
+        'semester' => 4,
+        'keahlian' => ['HTML', 'CSS', 'Laravel']
+    ]);
+});
 
 
-/* ROUTE KATALOG */
+/* ================= KATALOG ================= */
+Route::get('/katalog', function () {
+    $produk = [
+        ['id'=>1,'nama'=>'Ramen Ayam','harga'=>15000],
+        ['id'=>2,'nama'=>'Ramen Sapi','harga'=>20000],
+    ];
+    return view('katalog.index', compact('produk'));
+});
 
-Route::get('/katalog', [KatalogController::class, 'index'])
-    ->name('katalog.index');
+Route::get('/katalog/{id}', function ($id) {
+    $produk = [
+        1 => ['id'=>1,'nama'=>'Ramen Ayam','harga'=>15000],
+        2 => ['id'=>2,'nama'=>'Ramen Sapi','harga'=>20000],
+    ];
 
-Route::get('/katalog/{id}', [KatalogController::class, 'show'])
-    ->name('katalog.show');
+    return view('katalog.show', [
+        'produk' => $produk[$id] ?? null
+    ]);
+});
+
+
+/* ================= PRODUK (LATIHAN 3) ================= */
+Route::get('/produk', function () {
+    $produk = [
+        (object)['id'=>1,'nama'=>'Ramen Ayam','harga'=>15000,'deskripsi'=>'Enak'],
+        (object)['id'=>2,'nama'=>'Ramen Sapi','harga'=>20000,'deskripsi'=>'Mantap'],
+        (object)['id'=>3,'nama'=>'Ramen Seafood','harga'=>25000,'deskripsi'=>'Lezat'],
+    ];
+
+    return view('produk.index', compact('produk'));
+});
+
+Route::get('/produk/create', function () {
+    return view('produk.create');
+});
