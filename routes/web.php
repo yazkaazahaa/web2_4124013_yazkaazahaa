@@ -103,8 +103,8 @@ Route::get('/katalog/{id}', function ($id) {
         ],
         6 => [
             'id' => 6,
-            'nama' => 'Ramen Tempura',
-            'harga' => 23000,
+            'nama' => 'Ramen ayam katsu',
+            'harga' => 24000,
             'kategori' => 'Ramen',
             'deskripsi' => 'Ramen lezat disajikan dengan tempura renyah.'
         ],
@@ -153,8 +153,8 @@ Route::get('/produk', function () {
         ],
         (object)[
             'id' => 6,
-            'nama' => 'Ramen Tempura',
-            'harga' => 23000,
+            'nama' => 'Ramen ayam katsu',
+            'harga' => 24000,
             'deskripsi' => 'Ramen lezat disajikan dengan tempura renyah.'
         ],
     ];
