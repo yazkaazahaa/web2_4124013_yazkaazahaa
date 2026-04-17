@@ -15,11 +15,6 @@ Route::get('/profil', function () {
         'keahlian' => ['HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'MySQL']
     ]);
 });
-
-Route::get('/tentang', function () {
-    return view('tentang');
-});
-
 Route::get('/katalog', function () {
     $produk = [
         [
