@@ -2,55 +2,166 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-/* ================= PROFIL ================= */
 Route::get('/profil', function () {
     return view('profil', [
-        'nama' => 'Yazka',
+        'nama' => 'Yazka Azahaa',
         'nim' => '4124013',
         'prodi' => 'Sistem Informasi',
         'semester' => 4,
-        'keahlian' => ['HTML', 'CSS', 'Laravel']
+        'keahlian' => ['HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'MySQL']
     ]);
 });
 
+Route::get('/tentang', function () {
+    return view('tentang');
+});
 
-/* ================= KATALOG ================= */
 Route::get('/katalog', function () {
     $produk = [
-        ['id'=>1,'nama'=>'Ramen Ayam','harga'=>15000],
-        ['id'=>2,'nama'=>'Ramen Sapi','harga'=>20000],
+        [
+            'id' => 1,
+            'nama' => 'Ramen Ayam Original',
+            'harga' => 18000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen kuah gurih dengan topping ayam original.'
+        ],
+        [
+            'id' => 2,
+            'nama' => 'Ramen Spicy Beef',
+            'harga' => 22000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen pedas dengan irisan daging sapi lembut.'
+        ],
+        [
+            'id' => 3,
+            'nama' => 'Ramen Kari Jepang',
+            'harga' => 20000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen kuah kari khas Jepang yang creamy dan nikmat.'
+        ],
+        [
+            'id' => 4,
+            'nama' => 'Ramen Seafood',
+            'harga' => 25000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen dengan topping seafood segar dan kuah spesial.'
+        ],
+        [
+            'id' => 5,
+            'nama' => 'Ramen Chashu',
+            'harga' => 24000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen dengan irisan chashu empuk dan bumbu khas.'
+        ],
+        [
+            'id' => 6,
+            'nama' => 'Ramen Tempura',
+            'harga' => 23000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen lezat disajikan dengan tempura renyah.'
+        ],
     ];
+
     return view('katalog.index', compact('produk'));
 });
 
 Route::get('/katalog/{id}', function ($id) {
     $produk = [
-        1 => ['id'=>1,'nama'=>'Ramen Ayam','harga'=>15000],
-        2 => ['id'=>2,'nama'=>'Ramen Sapi','harga'=>20000],
+        1 => [
+            'id' => 1,
+            'nama' => 'Ramen Ayam Original',
+            'harga' => 18000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen kuah gurih dengan topping ayam original.'
+        ],
+        2 => [
+            'id' => 2,
+            'nama' => 'Ramen Spicy Beef',
+            'harga' => 22000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen pedas dengan irisan daging sapi lembut.'
+        ],
+        3 => [
+            'id' => 3,
+            'nama' => 'Ramen Kari Jepang',
+            'harga' => 20000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen kuah kari khas Jepang yang creamy dan nikmat.'
+        ],
+        4 => [
+            'id' => 4,
+            'nama' => 'Ramen Seafood',
+            'harga' => 25000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen dengan topping seafood segar dan kuah spesial.'
+        ],
+        5 => [
+            'id' => 5,
+            'nama' => 'Ramen Chashu',
+            'harga' => 24000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen dengan irisan chashu empuk dan bumbu khas.'
+        ],
+        6 => [
+            'id' => 6,
+            'nama' => 'Ramen Tempura',
+            'harga' => 23000,
+            'kategori' => 'Ramen',
+            'deskripsi' => 'Ramen lezat disajikan dengan tempura renyah.'
+        ],
     ];
 
+    if (!isset($produk[$id])) {
+        abort(404);
+    }
+
     return view('katalog.show', [
-        'produk' => $produk[$id] ?? null
+        'produk' => $produk[$id]
     ]);
 });
 
-
-/* ================= PRODUK (LATIHAN 3) ================= */
 Route::get('/produk', function () {
     $produk = [
-        (object)['id'=>1,'nama'=>'Ramen Ayam','harga'=>15000,'deskripsi'=>'Enak'],
-        (object)['id'=>2,'nama'=>'Ramen Sapi','harga'=>20000,'deskripsi'=>'Mantap'],
-        (object)['id'=>3,'nama'=>'Ramen Seafood','harga'=>25000,'deskripsi'=>'Lezat'],
+        (object)[
+            'id' => 1,
+            'nama' => 'Ramen Ayam Original',
+            'harga' => 18000,
+            'deskripsi' => 'Ramen kuah gurih dengan topping ayam original.'
+        ],
+        (object)[
+            'id' => 2,
+            'nama' => 'Ramen Spicy Beef',
+            'harga' => 22000,
+            'deskripsi' => 'Ramen pedas dengan irisan daging sapi lembut.'
+        ],
+        (object)[
+            'id' => 3,
+            'nama' => 'Ramen Kari Jepang',
+            'harga' => 20000,
+            'deskripsi' => 'Ramen kuah kari khas Jepang yang creamy dan nikmat.'
+        ],
+        (object)[
+            'id' => 4,
+            'nama' => 'Ramen Seafood',
+            'harga' => 25000,
+            'deskripsi' => 'Ramen dengan topping seafood segar dan kuah spesial.'
+        ],
+        (object)[
+            'id' => 5,
+            'nama' => 'Ramen Chashu',
+            'harga' => 24000,
+            'deskripsi' => 'Ramen dengan irisan chashu empuk dan bumbu khas.'
+        ],
+        (object)[
+            'id' => 6,
+            'nama' => 'Ramen Tempura',
+            'harga' => 23000,
+            'deskripsi' => 'Ramen lezat disajikan dengan tempura renyah.'
+        ],
     ];
 
     return view('produk.index', compact('produk'));
