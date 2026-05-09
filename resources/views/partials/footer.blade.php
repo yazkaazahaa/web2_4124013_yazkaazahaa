@@ -1,5 +1,19 @@
-<footer class="bg-slate-900 text-white mt-10">
-    <div class="max-w-7xl mx-auto px-6 py-5 text-center">
-        <p>&copy; {{ date('Y') }} Web2 UNIPDU_Kelompok 5 </p>
+<footer class="bg-red-950 text-white mt-16 border-t border-red-900">
+
+    <div class="max-w-7xl mx-auto px-6 py-8 text-center">
+
+        <h2 class="text-2xl font-bold mb-2">
+            🍜 Nekovina Ramen
+        </h2>
+
+        <p class="text-red-200 mb-4">
+            Nikmati pengalaman ramen Jepang modern langsung dari meja Anda.
+        </p>
+
+        <div class="text-sm text-red-300">
+            &copy; {{ date('Y') }} Nekovina Ramen — Web Programming 2
+        </div>
+
     </div>
+
 </footer>

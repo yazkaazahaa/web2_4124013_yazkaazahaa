@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Web2 App')</title>
+
+    <title>@yield('title', 'Nekovina Ramen')</title>
+
+    {{-- Tailwind CSS --}}
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-100 min-h-screen flex flex-col">
 
+<body class="bg-amber-50 min-h-screen flex flex-col">
+
+    {{-- Navbar --}}
     @include('partials.navbar')
 
-    <main class="flex-1 max-w-6xl mx-auto w-full px-4 py-8">
+    {{-- Main Content --}}
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 py-8">
+
         @yield('content')
+
     </main>
 
+    {{-- Footer --}}
     @include('partials.footer')
 
 </body>

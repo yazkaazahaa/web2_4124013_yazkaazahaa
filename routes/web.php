@@ -1,172 +1,135 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KatalogController;
+
+/*
+|--------------------------------------------------------------------------
+| WEB ROUTES
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/', function () {
     return view('index');
 });
 
+/*
+|--------------------------------------------------------------------------
+| PROFIL
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/profil', function () {
+
     return view('profil', [
+
         'nama' => 'Yazka Azahaa',
         'nim' => '4124013',
         'prodi' => 'Sistem Informasi',
         'semester' => 4,
-        'keahlian' => ['HTML', 'CSS', 'JavaScript', 'PHP', 'Laravel', 'MySQL']
+
+        'keahlian' => [
+            'Laravel',
+            'Tailwind CSS',
+            'Desain Web'
+        ]
+
     ]);
+
 });
+
+/*
+|--------------------------------------------------------------------------
+| TENTANG
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/tentang', function () {
     return view('tentang');
 });
 
-Route::get('/katalog', function () {
-    $produk = [
-        [
-            'id' => 1,
-            'nama' => 'Ramen Ayam Original',
-            'harga' => 18000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen kuah gurih dengan topping ayam original.'
-        ],
-        [
-            'id' => 2,
-            'nama' => 'Ramen Spicy Beef',
-            'harga' => 22000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen pedas dengan irisan daging sapi lembut.'
-        ],
-        [
-            'id' => 3,
-            'nama' => 'Ramen Kari Jepang',
-            'harga' => 20000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen kuah kari khas Jepang yang creamy dan nikmat.'
-        ],
-        [
-            'id' => 4,
-            'nama' => 'Ramen Seafood',
-            'harga' => 25000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen dengan topping seafood segar dan kuah spesial.'
-        ],
-        [
-            'id' => 5,
-            'nama' => 'Ramen Chashu',
-            'harga' => 24000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen dengan irisan chashu empuk dan bumbu khas.'
-        ],
-        [
-            'id' => 6,
-            'nama' => 'Ramen Tempura',
-            'harga' => 23000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen lezat disajikan dengan tempura renyah.'
-        ],
-    ];
+/*
+|--------------------------------------------------------------------------
+| KATALOG RAMEN (DATABASE)
+|--------------------------------------------------------------------------
+*/
 
-    return view('katalog.index', compact('produk'));
-});
+// Menampilkan semua menu ramen
+Route::get('/katalog', [KatalogController::class, 'index']);
 
-Route::get('/katalog/{id}', function ($id) {
-    $produk = [
-        1 => [
-            'id' => 1,
-            'nama' => 'Ramen Ayam Original',
-            'harga' => 18000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen kuah gurih dengan topping ayam original.'
-        ],
-        2 => [
-            'id' => 2,
-            'nama' => 'Ramen Spicy Beef',
-            'harga' => 22000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen pedas dengan irisan daging sapi lembut.'
-        ],
-        3 => [
-            'id' => 3,
-            'nama' => 'Ramen Kari Jepang',
-            'harga' => 20000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen kuah kari khas Jepang yang creamy dan nikmat.'
-        ],
-        4 => [
-            'id' => 4,
-            'nama' => 'Ramen Seafood',
-            'harga' => 25000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen dengan topping seafood segar dan kuah spesial.'
-        ],
-        5 => [
-            'id' => 5,
-            'nama' => 'Ramen Chashu',
-            'harga' => 24000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen dengan irisan chashu empuk dan bumbu khas.'
-        ],
-        6 => [
-            'id' => 6,
-            'nama' => 'Ramen Tempura',
-            'harga' => 23000,
-            'kategori' => 'Ramen',
-            'deskripsi' => 'Ramen lezat disajikan dengan tempura renyah.'
-        ],
-    ];
+// Form tambah menu ramen
+Route::get('/katalog/create', [KatalogController::class, 'create']);
 
-    if (!isset($produk[$id])) {
-        abort(404);
-    }
+// Simpan menu ramen baru
+Route::post('/katalog', [KatalogController::class, 'store']);
 
-    return view('katalog.show', [
-        'produk' => $produk[$id]
-    ]);
-});
+// Detail menu ramen
+Route::get('/katalog/{id}', [KatalogController::class, 'show']);
+
+/*
+|--------------------------------------------------------------------------
+| PRODUK LAMA
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/produk', function () {
+
     $produk = [
+
         (object)[
             'id' => 1,
-            'nama' => 'Ramen Ayam Original',
-            'harga' => 18000,
-            'deskripsi' => 'Ramen kuah gurih dengan topping ayam original.'
+            'nama' => 'Spicy Jigoku Ramen',
+            'harga' => 32000,
+            'deskripsi' => 'Ramen pedas khas Jepang dengan kuah rich spicy miso.'
         ],
+
         (object)[
             'id' => 2,
-            'nama' => 'Ramen Spicy Beef',
-            'harga' => 22000,
-            'deskripsi' => 'Ramen pedas dengan irisan daging sapi lembut.'
+            'nama' => 'Tokyo Chashu Ramen',
+            'harga' => 35000,
+            'deskripsi' => 'Ramen autentik dengan topping chashu lembut khas Tokyo.'
         ],
+
         (object)[
             'id' => 3,
-            'nama' => 'Ramen Kari Jepang',
-            'harga' => 20000,
-            'deskripsi' => 'Ramen kuah kari khas Jepang yang creamy dan nikmat.'
+            'nama' => 'Kuro Curry Ramen',
+            'harga' => 34000,
+            'deskripsi' => 'Ramen kuah kari creamy dengan aroma rempah Jepang.'
         ],
+
         (object)[
             'id' => 4,
-            'nama' => 'Ramen Seafood',
-            'harga' => 25000,
-            'deskripsi' => 'Ramen dengan topping seafood segar dan kuah spesial.'
+            'nama' => 'Ebi Volcano Ramen',
+            'harga' => 39000,
+            'deskripsi' => 'Ramen seafood premium dengan sensasi pedas volcano.'
         ],
+
         (object)[
             'id' => 5,
-            'nama' => 'Ramen Chashu',
-            'harga' => 24000,
-            'deskripsi' => 'Ramen dengan irisan chashu empuk dan bumbu khas.'
+            'nama' => 'Miso Dragon Ramen',
+            'harga' => 36000,
+            'deskripsi' => 'Kuah miso gurih dengan telur ajitsuke dan nori premium.'
         ],
+
         (object)[
             'id' => 6,
-            'nama' => 'Ramen Tempura',
-            'harga' => 23000,
-            'deskripsi' => 'Ramen lezat disajikan dengan tempura renyah.'
+            'nama' => 'Tempura Fusion Ramen',
+            'harga' => 38000,
+            'deskripsi' => 'Ramen modern dengan tempura renyah dan kuah spesial.'
         ],
+
     ];
 
     return view('produk.index', compact('produk'));
+
 });
 
 Route::get('/produk/create', function () {
     return view('produk.create');
+});
+
+Route::post('/produk/create', function () {
+
+    return redirect('/produk');
+
 });

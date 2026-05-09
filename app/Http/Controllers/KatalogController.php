@@ -3,40 +3,66 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produk;
 
 class KatalogController extends Controller
 {
-    // Menampilkan daftar produk
-    public function index()
+    // Menampilkan daftar menu ramen
+    public function index(Request $request)
     {
-        $produk = [
-            ['id' => 1, 'nama' => 'Ramen Original', 'harga' => 25000],
-            ['id' => 2, 'nama' => 'Ramen Spicy', 'harga' => 28000],
-            ['id' => 3, 'nama' => 'Ramen Seafood', 'harga' => 32000],
-            ['id' => 4, 'nama' => 'Ramen Chicken', 'harga' => 27000],
-            ['id' => 5, 'nama' => 'Ramen Beef', 'harga' => 35000]
-        ];
+        $search = $request->search;
 
-        // Sesuaikan view dengan folder katalog
-        return view('katalog.index', ['produk' => $produk]);
+        $produk = Produk::when($search, function ($query, $search) {
+
+                $query->where('nama', 'LIKE', "%{$search}%")
+                      ->orWhere('kategori', 'LIKE', "%{$search}%");
+
+            })
+            ->latest()
+            ->paginate(3);
+
+        return view('katalog.index', [
+            'produk' => $produk
+        ]);
     }
 
-    // Menampilkan detail produk
+    // Menampilkan form tambah ramen
+    public function create()
+    {
+        return view('katalog.create');
+    }
+
+    // Menyimpan menu ramen baru
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric',
+            'kategori' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        Produk::create([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'kategori' => $request->kategori,
+            'deskripsi' => $request->deskripsi,
+            'aktif' => true,
+        ]);
+
+        return redirect('/katalog')
+                ->with('success', 'Menu ramen berhasil ditambahkan');
+    }
+
+    // Menampilkan detail menu ramen
     public function show($id)
     {
-        $produk = [
-            1 => ['id' => 1, 'nama' => 'Ramen Original', 'harga' => 25000],
-            2 => ['id' => 2, 'nama' => 'Ramen Spicy', 'harga' => 28000],
-            3 => ['id' => 3, 'nama' => 'Ramen Seafood', 'harga' => 32000],
-            4 => ['id' => 4, 'nama' => 'Ramen Chicken', 'harga' => 27000],
-            5 => ['id' => 5, 'nama' => 'Ramen Beef', 'harga' => 35000]
-        ];
+        $produk = Produk::findOrFail($id);
 
-        if (!isset($produk[$id])) {
-            return "<h1>Produk tidak ditemukan</h1>";
-        }
-
-        // Sesuaikan view dengan folder katalog
-        return view('katalog.show', ['produk' => $produk[$id]]);
+        return view('katalog.show', [
+            'produk' => $produk
+        ]);
     }
 }

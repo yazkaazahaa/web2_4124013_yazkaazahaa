@@ -3,27 +3,116 @@
 @section('title', 'Profil')
 
 @section('content')
-    <div class="bg-white rounded-2xl shadow-md p-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div>
-                <h1 class="text-4xl font-bold text-slate-800 mb-6">Profil Mahasiswa</h1>
 
-                <div class="space-y-4 text-xl text-slate-700">
-                    <p><span class="font-semibold">Nama:</span> {{ $nama }}</p>
-                    <p><span class="font-semibold">NIM:</span> {{ $nim }}</p>
-                    <p><span class="font-semibold">Prodi:</span> {{ $prodi }}</p>
-                    <p><span class="font-semibold">Semester:</span> {{ $semester }}</p>
-                </div>
-            </div>
+    {{-- Header --}}
+    <div class="mb-8">
 
-            <div>
-                <h2 class="text-3xl font-bold text-slate-800 mb-4">Keahlian</h2>
-                <ul class="list-disc ml-6 space-y-3 text-xl text-slate-700">
-                    @foreach($keahlian as $skill)
-                        <li>{{ $skill }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
+        <h1 class="text-5xl font-bold text-red-950 mb-3">
+            Profil Developer
+        </h1>
+
+        <p class="text-xl text-slate-600">
+            Informasi mahasiswa pengembang website Nekovina Ramen.
+        </p>
+
     </div>
+
+    {{-- Card --}}
+    <div class="bg-white border border-red-100
+                rounded-3xl shadow-xl p-10">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+            {{-- Biodata --}}
+            <div>
+
+                <div class="flex items-center gap-4 mb-8">
+
+                    <div class="w-16 h-16 rounded-full
+                                bg-red-700 text-white
+                                flex items-center justify-center
+                                text-3xl">
+
+                        👨‍🍳
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="text-3xl font-bold text-red-950">
+                            Data Mahasiswa
+                        </h2>
+
+                        <p class="text-slate-500">
+                            Web Programming 2 Project
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="space-y-5 text-lg text-slate-700">
+
+                    <div class="border-b border-slate-100 pb-3">
+                        <span class="font-semibold text-red-900">
+                            Nama:
+                        </span>
+                        {{ $nama }}
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-3">
+                        <span class="font-semibold text-red-900">
+                            NIM:
+                        </span>
+                        {{ $nim }}
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-3">
+                        <span class="font-semibold text-red-900">
+                            Program Studi:
+                        </span>
+                        {{ $prodi }}
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-3">
+                        <span class="font-semibold text-red-900">
+                            Semester:
+                        </span>
+                        {{ $semester }}
+                    </div>
+
+                </div>
+
+            </div>
+
+            {{-- Skill --}}
+            <div>
+
+                <h2 class="text-3xl font-bold text-red-950 mb-6">
+                    Keahlian
+                </h2>
+
+                <div class="space-y-4">
+
+                    @foreach($keahlian as $skill)
+
+                        <div class="bg-red-50 border border-red-100
+                                    rounded-2xl px-5 py-4
+                                    text-lg text-slate-700
+                                    shadow-sm">
+
+                            {{ $skill }}
+
+                        </div>
+
+                    @endforeach
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 @endsection

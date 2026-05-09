@@ -3,48 +3,110 @@
 @section('title', 'Home')
 
 @section('content')
-    <section class="bg-white rounded-2xl shadow-md p-10 mb-8">
-        <h1 class="text-5xl font-bold text-slate-800 mb-4">
-            Laravel + Blade + Tailwind CSS
-        </h1>
-        <p class="text-xl text-slate-600 mb-8">
-            Project latihan Pemrograman Web 2 untuk membangun tampilan web modern
-            dengan Blade Layout dan Tailwind CSS.
-        </p>
 
-        <div class="flex gap-4">
-            <a href="/profil" class="bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl font-semibold transition">
-                Lihat Profil
-            </a>
-            <a href="/katalog" class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-xl font-semibold transition">
-                Buka Katalog
-            </a>
-            <a href="/produk" class="border border-slate-300 hover:bg-slate-100 text-slate-700 px-6 py-3 rounded-xl font-semibold transition">
-                Lihat Produk
-            </a>
+    {{-- Hero Section --}}
+    <section class="bg-gradient-to-r from-red-900 to-red-700
+                    text-white rounded-3xl shadow-2xl
+                    p-12 mb-10">
+
+        <div class="max-w-3xl">
+
+            <p class="text-red-200 text-lg mb-3">
+                Selamat Datang di
+            </p>
+
+            <h1 class="text-6xl font-bold mb-6 leading-tight">
+                🍜 Nekovina Ramen
+            </h1>
+
+            <p class="text-xl text-red-100 mb-8 leading-relaxed">
+                Nikmati ramen autentik khas Jepang dengan cita rasa modern.
+                Pesan langsung dari meja Anda melalui sistem digital QR Menu.
+            </p>
+
+            {{-- Button --}}
+            <div class="flex flex-wrap gap-4">
+
+                <a href="/katalog"
+                   class="bg-white text-red-800
+                          hover:bg-red-100
+                          px-6 py-3 rounded-2xl
+                          font-semibold text-lg transition">
+
+                    Lihat Menu
+
+                </a>
+
+                <a href="/produk"
+                   class="bg-red-950 hover:bg-black
+                          text-white px-6 py-3
+                          rounded-2xl font-semibold
+                          text-lg transition">
+
+                    Pesan Sekarang
+
+                </a>
+
+            </div>
+
         </div>
+
     </section>
 
+    {{-- Feature Section --}}
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl shadow p-6">
-            <h2 class="text-2xl font-bold text-slate-800 mb-3">Blade Layout</h2>
-            <p class="text-slate-600">
-                Semua halaman memakai layout yang sama agar konsisten dan rapi.
+
+        {{-- Card 1 --}}
+        <div class="bg-white rounded-3xl shadow-lg p-8 border border-red-100">
+
+            <div class="text-5xl mb-4">
+                🍥
+            </div>
+
+            <h2 class="text-2xl font-bold text-red-900 mb-3">
+                Ramen Premium
+            </h2>
+
+            <p class="text-slate-600 leading-relaxed">
+                Menggunakan bahan berkualitas dengan kuah autentik khas Jepang.
             </p>
+
         </div>
 
-        <div class="bg-white rounded-2xl shadow p-6">
-            <h2 class="text-2xl font-bold text-slate-800 mb-3">Tailwind CSS</h2>
-            <p class="text-slate-600">
-                Tampilan dibuat modern dengan utility class yang cepat dan fleksibel.
+        {{-- Card 2 --}}
+        <div class="bg-white rounded-3xl shadow-lg p-8 border border-red-100">
+
+            <div class="text-5xl mb-4">
+                📱
+            </div>
+
+            <h2 class="text-2xl font-bold text-red-900 mb-3">
+                Digital QR Menu
+            </h2>
+
+            <p class="text-slate-600 leading-relaxed">
+                Pesan langsung dari meja dengan sistem scan QR yang cepat dan praktis.
             </p>
+
         </div>
 
-        <div class="bg-white rounded-2xl shadow p-6">
-            <h2 class="text-2xl font-bold text-slate-800 mb-3">Responsive UI</h2>
-            <p class="text-slate-600">
-                Halaman tetap enak dilihat di mobile maupun desktop.
+        {{-- Card 3 --}}
+        <div class="bg-white rounded-3xl shadow-lg p-8 border border-red-100">
+
+            <div class="text-5xl mb-4">
+                🔥
+            </div>
+
+            <h2 class="text-2xl font-bold text-red-900 mb-3">
+                Level Pedas
+            </h2>
+
+            <p class="text-slate-600 leading-relaxed">
+                Pilih level pedas favoritmu mulai dari original hingga extreme spicy.
             </p>
+
         </div>
+
     </section>
+
 @endsection
