@@ -33,16 +33,6 @@
             <a href="/tentang"
                class="hover:text-red-300 transition duration-300">
                 Tentang
-            </a>
-
-            {{-- Tombol --}}
-            <a href="/produk/create"
-               class="bg-red-600 hover:bg-red-700
-                      text-white px-5 py-2 rounded-2xl
-                      font-semibold shadow-lg
-                      transition duration-300">
-
-                + Tambah Menu
 
             </a>
 

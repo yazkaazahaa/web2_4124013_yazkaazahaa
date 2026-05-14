@@ -26,13 +26,13 @@ class KatalogController extends Controller
         ]);
     }
 
-    // Menampilkan form tambah ramen
+    // Form tambah ramen
     public function create()
     {
         return view('katalog.create');
     }
 
-    // Menyimpan menu ramen baru
+    // Simpan ramen baru
     public function store(Request $request)
     {
         $request->validate([
@@ -56,7 +56,7 @@ class KatalogController extends Controller
                 ->with('success', 'Menu ramen berhasil ditambahkan');
     }
 
-    // Menampilkan detail menu ramen
+    // Detail ramen
     public function show($id)
     {
         $produk = Produk::findOrFail($id);
@@ -64,5 +64,51 @@ class KatalogController extends Controller
         return view('katalog.show', [
             'produk' => $produk
         ]);
+    }
+
+    // Form edit ramen
+    public function edit($id)
+    {
+        $produk = Produk::findOrFail($id);
+
+        return view('katalog.edit', [
+            'produk' => $produk
+        ]);
+    }
+
+    // Update ramen
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric',
+            'kategori' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        $produk = Produk::findOrFail($id);
+
+        $produk->update([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'kategori' => $request->kategori,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        return redirect('/katalog')
+                ->with('success', 'Menu ramen berhasil diupdate');
+    }
+
+    // Hapus ramen
+    public function destroy($id)
+    {
+        $produk = Produk::findOrFail($id);
+
+        $produk->delete();
+
+        return redirect('/katalog')
+                ->with('success', 'Menu ramen berhasil dihapus');
     }
 }

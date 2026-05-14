@@ -23,7 +23,7 @@ Route::get('/profil', function () {
 
     return view('profil', [
 
-        'nama' => 'Yazka Azahaa',
+        'nama' => 'Yazka Zahaa',
         'nim' => '4124013',
         'prodi' => 'Sistem Informasi',
         'semester' => 4,
@@ -50,7 +50,7 @@ Route::get('/tentang', function () {
 
 /*
 |--------------------------------------------------------------------------
-| KATALOG RAMEN (DATABASE)
+| KATALOG RAMEN CRUD
 |--------------------------------------------------------------------------
 */
 
@@ -65,6 +65,15 @@ Route::post('/katalog', [KatalogController::class, 'store']);
 
 // Detail menu ramen
 Route::get('/katalog/{id}', [KatalogController::class, 'show']);
+
+// Form edit menu ramen
+Route::get('/katalog/{id}/edit', [KatalogController::class, 'edit']);
+
+// Update menu ramen
+Route::put('/katalog/{id}', [KatalogController::class, 'update']);
+
+// Hapus menu ramen
+Route::delete('/katalog/{id}', [KatalogController::class, 'destroy']);
 
 /*
 |--------------------------------------------------------------------------
