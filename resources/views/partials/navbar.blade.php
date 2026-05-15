@@ -30,10 +30,14 @@
                 Pesanan
             </a>
 
+            <a href="/berita"
+               class="hover:text-red-300 transition duration-300">
+                Berita
+            </a>
+
             <a href="/tentang"
                class="hover:text-red-300 transition duration-300">
                 Tentang
-
             </a>
 
         </div>

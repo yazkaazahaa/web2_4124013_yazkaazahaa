@@ -8,11 +8,11 @@
     <div class="mb-8">
 
         <h1 class="text-5xl font-bold text-red-950 mb-3">
-            Profil Developer
+            Profil Kelompok
         </h1>
 
         <p class="text-xl text-slate-600">
-            Informasi mahasiswa pengembang website Nekovina Ramen.
+            Informasi kelompok pengembang website Nekovina Ramen.
         </p>
 
     </div>
@@ -40,7 +40,7 @@
                     <div>
 
                         <h2 class="text-3xl font-bold text-red-950">
-                            Data Mahasiswa
+                            Data Kelompok
                         </h2>
 
                         <p class="text-slate-500">
@@ -53,32 +53,75 @@
 
                 <div class="space-y-5 text-lg text-slate-700">
 
+                    {{-- Kelompok --}}
                     <div class="border-b border-slate-100 pb-3">
+
                         <span class="font-semibold text-red-900">
-                            Nama:
+                            Kelompok:
                         </span>
-                        {{ $nama }}
+
+                        {{ $kelompok }}
+
                     </div>
 
+                    {{-- Anggota --}}
                     <div class="border-b border-slate-100 pb-3">
-                        <span class="font-semibold text-red-900">
+
+                        <span class="font-semibold text-red-900 block mb-2">
+                            Anggota:
+                        </span>
+
+                        <ul class="list-disc pl-6">
+
+                            @foreach($anggota as $item)
+
+                                <li>{{ $item }}</li>
+
+                            @endforeach
+
+                        </ul>
+
+                    </div>
+
+                    {{-- NIM --}}
+                    <div class="border-b border-slate-100 pb-3">
+
+                        <span class="font-semibold text-red-900 block mb-2">
                             NIM:
                         </span>
-                        {{ $nim }}
+
+                        <ul class="list-disc pl-6">
+
+                            @foreach($nim as $item)
+
+                                <li>{{ $item }}</li>
+
+                            @endforeach
+
+                        </ul>
+
                     </div>
 
+                    {{-- Prodi --}}
                     <div class="border-b border-slate-100 pb-3">
+
                         <span class="font-semibold text-red-900">
                             Program Studi:
                         </span>
+
                         {{ $prodi }}
+
                     </div>
 
+                    {{-- Semester --}}
                     <div class="border-b border-slate-100 pb-3">
+
                         <span class="font-semibold text-red-900">
                             Semester:
                         </span>
+
                         {{ $semester }}
+
                     </div>
 
                 </div>

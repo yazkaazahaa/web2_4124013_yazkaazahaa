@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Produk')
+@section('title', 'Edit Produk')
 
 @section('content')
 
 <div class="max-w-3xl mx-auto">
 
     <h1 class="text-4xl font-bold text-red-900 mb-8">
-        Tambah Menu Ramen
+        Edit Menu Ramen
     </h1>
 
     {{-- Error --}}
@@ -31,11 +31,12 @@
     @endif
 
     {{-- Form --}}
-    <form action="{{ route('produk.store') }}"
+    <form action="{{ route('produk.update', $produk->id) }}"
           method="POST"
           class="bg-white shadow-xl rounded-3xl p-8 space-y-6">
 
         @csrf
+        @method('PUT')
 
         {{-- Nama --}}
         <div>
@@ -46,7 +47,7 @@
 
             <input type="text"
                    name="nama"
-                   value="{{ old('nama') }}"
+                   value="{{ old('nama', $produk->nama) }}"
                    class="w-full border border-slate-300
                           rounded-2xl px-5 py-3">
 
@@ -61,7 +62,7 @@
 
             <input type="number"
                    name="harga"
-                   value="{{ old('harga') }}"
+                   value="{{ old('harga', $produk->harga) }}"
                    class="w-full border border-slate-300
                           rounded-2xl px-5 py-3">
 
@@ -76,7 +77,7 @@
 
             <input type="number"
                    name="stok"
-                   value="{{ old('stok') }}"
+                   value="{{ old('stok', $produk->stok) }}"
                    class="w-full border border-slate-300
                           rounded-2xl px-5 py-3">
 
@@ -91,7 +92,7 @@
 
             <input type="text"
                    name="kategori"
-                   value="{{ old('kategori') }}"
+                   value="{{ old('kategori', $produk->kategori) }}"
                    class="w-full border border-slate-300
                           rounded-2xl px-5 py-3">
 
@@ -107,7 +108,7 @@
             <textarea name="deskripsi"
                       rows="5"
                       class="w-full border border-slate-300
-                             rounded-2xl px-5 py-3">{{ old('deskripsi') }}</textarea>
+                             rounded-2xl px-5 py-3">{{ old('deskripsi', $produk->deskripsi) }}</textarea>
 
         </div>
 
@@ -118,11 +119,11 @@
                     class="bg-red-700 hover:bg-red-800
                            text-white px-6 py-3 rounded-2xl">
 
-                Simpan Produk
+                Update Produk
 
             </button>
 
-            <a href="/produk"
+            <a href="{{ route('produk.index') }}"
                class="bg-slate-200 hover:bg-slate-300
                       px-6 py-3 rounded-2xl">
 

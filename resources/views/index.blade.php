@@ -47,6 +47,16 @@
 
                 </a>
 
+                <a href="/berita"
+                   class="bg-white text-red-800
+                          hover:bg-red-100
+                          px-6 py-3 rounded-2xl
+                          font-semibold text-lg transition">
+
+                    Lihat Berita
+
+                </a>
+
             </div>
 
         </div>

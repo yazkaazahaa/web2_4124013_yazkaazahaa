@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KatalogController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\BeritaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,21 +22,33 @@ Route::get('/', function () {
 */
 
 Route::get('/profil', function () {
+return view('profil', [
 
-    return view('profil', [
+    'kelompok' => 'Kelompok 4',
 
-        'nama' => 'Yazka Zahaa',
-        'nim' => '4124013',
-        'prodi' => 'Sistem Informasi',
-        'semester' => 4,
+    'anggota' => [
+        'Yazkaa Zahaa',
+        'Uhti Amelia',
+        'Yanis Kamil'
+    ],
 
-        'keahlian' => [
-            'Laravel',
-            'Tailwind CSS',
-            'Desain Web'
-        ]
+    'nim' => [
+        '4124013',
+        '4124011',
+        '4124012'
+    ],
 
-    ]);
+    'prodi' => 'Sistem Informasi',
+
+    'semester' => 4,
+
+    'keahlian' => [
+        'Laravel',
+        'Tailwind CSS',
+        'Desain Web'
+    ]
+
+]);
 
 });
 
@@ -77,68 +91,16 @@ Route::delete('/katalog/{id}', [KatalogController::class, 'destroy']);
 
 /*
 |--------------------------------------------------------------------------
-| PRODUK LAMA
+| PRODUK DATABASE
 |--------------------------------------------------------------------------
 */
 
-Route::get('/produk', function () {
+Route::resource('produk', ProdukController::class);
 
-    $produk = [
+/*
+|--------------------------------------------------------------------------
+| BERITA DATABASE
+|--------------------------------------------------------------------------
+*/
 
-        (object)[
-            'id' => 1,
-            'nama' => 'Spicy Jigoku Ramen',
-            'harga' => 32000,
-            'deskripsi' => 'Ramen pedas khas Jepang dengan kuah rich spicy miso.'
-        ],
-
-        (object)[
-            'id' => 2,
-            'nama' => 'Tokyo Chashu Ramen',
-            'harga' => 35000,
-            'deskripsi' => 'Ramen autentik dengan topping chashu lembut khas Tokyo.'
-        ],
-
-        (object)[
-            'id' => 3,
-            'nama' => 'Kuro Curry Ramen',
-            'harga' => 34000,
-            'deskripsi' => 'Ramen kuah kari creamy dengan aroma rempah Jepang.'
-        ],
-
-        (object)[
-            'id' => 4,
-            'nama' => 'Ebi Volcano Ramen',
-            'harga' => 39000,
-            'deskripsi' => 'Ramen seafood premium dengan sensasi pedas volcano.'
-        ],
-
-        (object)[
-            'id' => 5,
-            'nama' => 'Miso Dragon Ramen',
-            'harga' => 36000,
-            'deskripsi' => 'Kuah miso gurih dengan telur ajitsuke dan nori premium.'
-        ],
-
-        (object)[
-            'id' => 6,
-            'nama' => 'Tempura Fusion Ramen',
-            'harga' => 38000,
-            'deskripsi' => 'Ramen modern dengan tempura renyah dan kuah spesial.'
-        ],
-
-    ];
-
-    return view('produk.index', compact('produk'));
-
-});
-
-Route::get('/produk/create', function () {
-    return view('produk.create');
-});
-
-Route::post('/produk/create', function () {
-
-    return redirect('/produk');
-
-});
+Route::resource('berita', BeritaController::class);

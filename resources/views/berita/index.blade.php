@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Menu')
+@section('title', 'Berita')
 
 @section('content')
 
@@ -10,37 +10,37 @@
         <div>
 
             <h1 class="text-5xl font-bold text-red-950 mb-3">
-                Daftar Menu Ramen
+                Berita Nekovina
             </h1>
 
             <p class="text-xl text-slate-600">
-                Pilihan ramen autentik khas Nekovina Ramen.
+                Informasi terbaru seputar ramen dan promo Nekovina.
             </p>
 
         </div>
 
         {{-- Button --}}
-        <a href="/produk/create"
+        <a href="{{ route('berita.create') }}"
            class="bg-red-700 hover:bg-red-800
                   text-white px-6 py-3 rounded-2xl
                   text-lg font-semibold shadow-lg
                   transition duration-300">
 
-            + Tambah Menu
+            + Tambah Berita
 
         </a>
 
     </div>
 
-    {{-- Search Form --}}
+    {{-- Search --}}
     <form method="GET"
-          action="{{ route('produk.index') }}"
+          action="{{ route('berita.index') }}"
           class="mb-10 flex gap-3">
 
         <input type="text"
                name="q"
                value="{{ request('q') }}"
-               placeholder="Cari menu ramen..."
+               placeholder="Cari berita..."
                class="w-full border border-red-200 rounded-2xl
                       px-5 py-3 focus:outline-none
                       focus:ring-2 focus:ring-red-400">
@@ -69,22 +69,21 @@
     @endif
 
     {{-- Grid --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-        @forelse($produk as $item)
+        @forelse($berita as $item)
 
             <div class="bg-white border border-red-100
                         rounded-3xl shadow-lg overflow-hidden
-                        hover:shadow-2xl hover:-translate-y-1
-                        transition duration-300">
+                        hover:shadow-2xl transition duration-300">
 
-                {{-- Header Card --}}
+                {{-- Header --}}
                 <div class="bg-gradient-to-r from-red-700 to-red-900 p-5">
 
                     <span class="bg-white/20 text-white
                                  text-sm px-4 py-2 rounded-full">
 
-                        {{ $item->kategori ?? 'Menu Ramen' }}
+                        {{ $item->kategori ?? 'Berita' }}
 
                     </span>
 
@@ -93,54 +92,57 @@
                 {{-- Body --}}
                 <div class="p-6">
 
-                    <h2 class="text-3xl font-bold text-slate-800 mb-3">
-                        {{ $item->nama }}
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">
+                        {{ $item->judul }}
                     </h2>
 
-                    <p class="text-slate-600 text-lg mb-5 leading-relaxed">
-                        {{ $item->deskripsi ?? 'Deskripsi belum tersedia.' }}
+                    <p class="text-slate-600 text-lg leading-relaxed mb-6">
+                        {{ Str::limit($item->isi, 150) }}
                     </p>
 
-                    <p class="text-red-700 font-bold text-4xl mb-3">
-                        Rp {{ number_format($item->harga, 0, ',', '.') }}
-                    </p>
+                    <div class="flex items-center justify-between mb-6">
 
-                    <p class="text-slate-500 mb-6">
-                        Stok: {{ $item->stok }}
-                    </p>
+                        <p class="text-slate-500">
+                            Penulis:
+                            <span class="font-semibold">
+                                {{ $item->penulis }}
+                            </span>
+                        </p>
+
+                    </div>
 
                     {{-- Action --}}
-                    <div class="flex gap-3 flex-wrap">
+                    <div class="flex flex-wrap gap-3">
 
-                        <a href="{{ route('produk.show', $item->id) }}"
-                           class="inline-block bg-red-700 hover:bg-red-800
+                        <a href="{{ route('berita.show', $item->id) }}"
+                           class="bg-red-700 hover:bg-red-800
                                   text-white px-5 py-3 rounded-2xl
-                                  text-lg font-semibold transition duration-300">
+                                  font-semibold transition duration-300">
 
                             Detail
 
                         </a>
 
-                        <a href="{{ route('produk.edit', $item->id) }}"
+                        <a href="{{ route('berita.edit', $item->id) }}"
                            class="bg-yellow-400 hover:bg-yellow-500
                                   text-black px-5 py-3 rounded-2xl
-                                  text-lg font-semibold transition duration-300">
+                                  font-semibold transition duration-300">
 
                             Edit
 
                         </a>
 
-                        <form action="{{ route('produk.destroy', $item->id) }}"
+                        <form action="{{ route('berita.destroy', $item->id) }}"
                               method="POST">
 
                             @csrf
                             @method('DELETE')
 
                             <button type="submit"
-                                    onclick="return confirm('Yakin ingin menghapus menu ini?')"
+                                    onclick="return confirm('Yakin ingin menghapus berita ini?')"
                                     class="bg-slate-200 hover:bg-slate-300
                                            text-slate-800 px-5 py-3 rounded-2xl
-                                           text-lg font-semibold transition duration-300">
+                                           font-semibold transition duration-300">
 
                                 Hapus
 
@@ -156,14 +158,14 @@
 
         @empty
 
-            <div class="col-span-3 text-center py-20">
+            <div class="col-span-2 text-center py-20">
 
                 <h2 class="text-3xl font-bold text-slate-400 mb-3">
-                    Belum ada menu ramen
+                    Belum ada berita
                 </h2>
 
                 <p class="text-slate-500">
-                    Tambahkan menu baru untuk mulai mengisi katalog.
+                    Tambahkan berita baru untuk mulai mengisi halaman berita.
                 </p>
 
             </div>
@@ -174,7 +176,7 @@
 
     {{-- Pagination --}}
     <div class="mt-10">
-        {{ $produk->withQueryString()->links() }}
+        {{ $berita->withQueryString()->links() }}
     </div>
 
 @endsection

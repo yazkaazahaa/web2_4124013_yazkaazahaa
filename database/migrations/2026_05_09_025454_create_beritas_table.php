@@ -12,8 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('beritas', function (Blueprint $table) {
+
             $table->id();
+
+            $table->string('judul');
+
+            $table->text('isi');
+
+            $table->string('penulis');
+
+            $table->string('kategori')
+                  ->nullable();
+
             $table->timestamps();
+
         });
     }
 

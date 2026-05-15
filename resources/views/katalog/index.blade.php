@@ -59,13 +59,14 @@
     <div class="mb-8">
 
         <a href="/katalog/create"
-           class="bg-green-600 hover:bg-green-700
-                  text-white px-6 py-3 rounded-2xl
-                  font-semibold inline-block">
+   class="bg-red-700 hover:bg-red-800
+          text-white px-6 py-3 rounded-2xl
+          text-lg font-semibold shadow-lg
+          transition duration-300">
 
-            + Tambah Menu
+    + Tambah Menu
 
-        </a>
+</a>
 
     </div>
 
