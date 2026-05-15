@@ -11,7 +11,7 @@
         </p>
 
         <div class="text-sm text-red-300">
-            &copy; {{ date('Y') }} Nekovina Ramen — WEB 2 - Kelompok 4
+            &copy; {{ date('Y') }} Nekovina Ramen — WEB 2 - Kelompok 5
         </div>
 
     </div>

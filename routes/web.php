@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get('/profil', function () {
 return view('profil', [
 
-    'kelompok' => 'Kelompok 4',
+    'kelompok' => 'Kelompok 5',
 
     'anggota' => [
         'Yazkaa Zahaa',
